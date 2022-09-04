@@ -1,0 +1,113 @@
+#include<stdio.h>
+#define N 100
+int stack_arr[N];
+int top = -1;
+
+void printList()
+{
+    printf("\nYour stack elements are : ");
+    for(int i=top;i>=0;i--)
+    printf("%d ",stack_arr[i]);
+}
+
+int isEmpty()
+{
+    if(top == -1)
+    return 1;
+
+    else
+    return 0;
+}
+
+int isFull()
+{
+    if(top == N-1)
+    return 1;
+    else
+    return 0;
+
+}
+void length()
+{
+    printf("Length of stack = %d",top+1);
+}
+void push(int data)
+{
+    if(isFull() == 1)
+    {
+        printf("Stack Over flow");
+    }
+    else{
+    top++;
+    stack_arr[top] = data;     
+    }
+}
+
+int pop()
+{
+    int val;
+    if(isEmpty() == 1)
+    printf("The stack is empty! ");
+    else
+    {
+        val = stack_arr[top];
+        top--;
+        printf("The deleted element is %d",val);
+        return val;
+    }
+}
+
+void printTop()
+{
+    printf("The topmost element is %d ",stack_arr[top]);
+}
+
+void choiceList()
+{
+    int n,m,choice;
+
+    printf("\n\n1.push \n2.pop \n3.Print the elements \n4.Print the topmost element \n5.quit \nEnter your choice : ");
+    scanf("%d",&choice);
+    switch (choice)
+    {
+    case 1:
+        {
+         printf("Enter the size of Stack : (any number between 1 and 100) ");
+         scanf("%d",&n);
+         for(int i=1;i<=n;i++)
+         {
+        int k;
+        printf("Enter the Element %d : ",i);
+        scanf("%d",&k);
+        push(k);
+        }
+        choiceList();
+        }
+        break;
+
+    case 2:
+        pop();choiceList();break;
+
+    case 3:
+        printList();choiceList();break;
+
+    case 4:
+        printTop();choiceList();break;
+    
+    case 5:
+        return;break;
+
+    default:
+        printf("          ---INVALID CHOICE--        \n              TRY AGAIN \n");
+        choiceList();
+        break;
+    }
+
+}
+
+
+int main()
+{
+      choiceList();
+      return 0;
+}
